@@ -52,6 +52,7 @@ export const websiteJsonLd = {
   "@type": "WebSite",
   "@id": websiteId,
   name: siteConfig.name,
+  alternateName: "Credence",
   url: siteConfig.url,
   publisher: { "@id": organizationId },
   inLanguage: "en-US",
