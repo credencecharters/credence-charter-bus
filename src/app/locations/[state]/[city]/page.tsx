@@ -10,6 +10,7 @@ import {
   distanceMiles,
   getCity,
   getState,
+  isIndexableCity,
   locationsBuildConfig,
   nearbyCities,
   topCities,
@@ -72,6 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Charter Bus in ${data.city.name}, ${data.state.abbr}`,
     description: data.copy.description,
     path: `/locations/${stateSlug}/${citySlug}`,
+    noindex: !isIndexableCity(data.city),
   });
 }
 

@@ -24,6 +24,16 @@ export const cities = locationsData.cities as CityEntry[]
 export const locationsBuildConfig = {
   prebuildCityLimit: 25,
   stateCityPageSize: 150,
+  indexablePopulationFloor: 10000,
+}
+
+/**
+ * Pages below the floor stay live and linked but are noindex: at 16,399 cities
+ * the per-city copy is ~29% unique, which Google treats as scaled content and
+ * declines to index anyway. Raising the floor is the lever, not more templates.
+ */
+export function isIndexableCity(city: CityEntry) {
+  return city.population >= locationsBuildConfig.indexablePopulationFloor
 }
 
 const statesBySlug = new Map(states.map((state) => [state.slug, state]))

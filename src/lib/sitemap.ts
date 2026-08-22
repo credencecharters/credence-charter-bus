@@ -1,10 +1,12 @@
 import { siteConfig } from "@/config/site"
 import { allBlogPostsSorted, blogStates } from "@/data/blogs"
 import { fleetCategories } from "@/data/fleet"
-import { cities, states } from "@/data/locations"
+import { cities, isIndexableCity, states } from "@/data/locations"
 import { services } from "@/data/services"
 
 export const LOCATION_URLS_PER_SITEMAP = 50000
+
+const indexableCities = cities.filter(isIndexableCity)
 
 export function corePaths() {
   return [
@@ -32,12 +34,12 @@ export function corePaths() {
 }
 
 export function locationShardCount() {
-  return Math.max(1, Math.ceil(cities.length / LOCATION_URLS_PER_SITEMAP))
+  return Math.max(1, Math.ceil(indexableCities.length / LOCATION_URLS_PER_SITEMAP))
 }
 
 export function locationPathsForShard(shard: number) {
   const start = shard * LOCATION_URLS_PER_SITEMAP
-  return cities
+  return indexableCities
     .slice(start, start + LOCATION_URLS_PER_SITEMAP)
     .map((city) => `/locations/${city.stateSlug}/${city.slug}`)
 }

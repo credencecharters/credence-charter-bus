@@ -15,10 +15,23 @@ const legalLinks = [
   { label: "Refund Policy", href: "/refund" },
 ]
 
+const childrenOf = (href: string) =>
+  mainNav.find((item) => item.href === href)?.children?.filter(
+    (child) => child.href !== href
+  ) ?? []
+
+/**
+ * The header renders these only when a dropdown is open, so without them here
+ * six of the nine vehicle pages plus /how-to-book, /drivers and /affiliates
+ * have no crawlable link from any page.
+ */
+const vehicleLinks = childrenOf("/fleet")
+const aboutLinks = childrenOf("/about")
+
 function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <Container className="grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1.2fr]">
+      <Container className="grid gap-10 py-14 sm:grid-cols-2 xl:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div className="flex flex-col items-start gap-4">
           <Link href="/">
             <Logo tone="light" />
@@ -48,16 +61,32 @@ function Footer() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="/faq" className={footerLinkClass}>
-                FAQ
-              </Link>
-            </li>
+            {aboutLinks.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={footerLinkClass}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link href="/quote" className={footerLinkClass}>
                 Get a Free Quote
               </Link>
             </li>
+          </ul>
+        </nav>
+        <nav aria-label="Vehicles">
+          <h2 className="text-sm font-semibold tracking-[0.2em] uppercase text-accent">
+            Vehicles
+          </h2>
+          <ul className="mt-3 flex flex-col">
+            {vehicleLinks.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={footerLinkClass}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
         <div>
