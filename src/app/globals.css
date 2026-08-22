@@ -129,10 +129,10 @@
 
 @keyframes hero-slideshow {
   0%,
-  13.1% {
+  16.4% {
     opacity: 1;
   }
-  16.7%,
+  20%,
   96.4% {
     opacity: 0;
   }
@@ -142,8 +142,8 @@
 }
 
 /*
- * Tuned for exactly 6 layers over a 36s cycle (6s share each), so each layer holds
- * for 16.7% of the cycle and the 3.6% ramps are the crossfade. Change the layer count
+ * Tuned for exactly 5 layers over a 30s cycle (6s share each), so each layer holds
+ * for 20% of the cycle and the 3.6% ramps are the crossfade. Change the layer count
  * and all four percentages move: hold ends at 100/N - 3.6, hidden starts at 100/N.
  * HERO_SLIDESHOW_DURATION_S in hero-media.tsx must match this duration.
  *
@@ -155,6 +155,6 @@
  */
 @media (prefers-reduced-motion: no-preference) {
   .hero-slide {
-    animation: hero-slideshow 36s ease-in-out infinite;
+    animation: hero-slideshow 30s ease-in-out infinite;
   }
 }
