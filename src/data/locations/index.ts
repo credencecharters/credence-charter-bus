@@ -44,10 +44,29 @@ export function getCity(stateSlug: string, citySlug: string) {
   return citiesBySlug.get(`${stateSlug}/${citySlug}`)
 }
 
+const citiesByState = new Map<string, CityEntry[]>()
+for (const city of cities) {
+  const bucket = citiesByState.get(city.stateSlug)
+  if (bucket) bucket.push(city)
+  else citiesByState.set(city.stateSlug, [city])
+}
+for (const bucket of citiesByState.values()) {
+  bucket.sort((a, b) => b.population - a.population)
+}
+
+const citiesByStateAlphabetical = new Map(
+  [...citiesByState].map(([stateSlug, bucket]) => [
+    stateSlug,
+    [...bucket].sort((a, b) => a.name.localeCompare(b.name)),
+  ])
+)
+
 export function citiesOfState(stateSlug: string) {
-  return cities
-    .filter((city) => city.stateSlug === stateSlug)
-    .sort((a, b) => b.population - a.population)
+  return citiesByState.get(stateSlug) ?? []
+}
+
+export function citiesOfStateAlphabetical(stateSlug: string) {
+  return citiesByStateAlphabetical.get(stateSlug) ?? []
 }
 
 export function topCities(limit: number) {

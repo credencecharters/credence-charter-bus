@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = cityCopy(stateSlug, citySlug);
   if (!data) return {};
   return pageMetadata({
-    title: `Charter Bus Rental in ${data.city.name}, ${data.state.name}`,
+    title: `Charter Bus in ${data.city.name}, ${data.state.abbr}`,
     description: data.copy.description,
     path: `/locations/${stateSlug}/${citySlug}`,
   });
@@ -89,7 +89,7 @@ export default async function CityPage({ params }: Props) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Charter Bus Rental in ${city.name}, ${state.name}`,
+    name: `Charter Bus in ${city.name}, ${state.abbr}`,
     serviceType: "Charter bus rental",
     description: copy.description,
     url: pageUrl,
@@ -139,14 +139,12 @@ export default async function CityPage({ params }: Props) {
           </nav>
           <SectionHeading
             as="h1"
-            eyebrow={`${city.name}, ${state.abbr}`}
-            title={`Charter Bus Rental in ${city.name}, ${state.name}`}
+            title={`Charter Bus in ${city.name}, ${state.abbr}`}
             className="mt-6"
           />
           <div className="mt-6 flex max-w-3xl flex-col gap-4 text-lg">
-            <p>{copy.opening}</p>
-            <p>{copy.scale}</p>
-            <p>{copy.detail}</p>
+            <p>{copy.lead}</p>
+            <p>{copy.close}</p>
           </div>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Button asChild size="lg">

@@ -1,6 +1,7 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 
-import { citiesOfState, states, statesByRegion } from "@/data/locations";
+import { citiesOfStateAlphabetical, states, statesByRegion } from "@/data/locations";
 import { networkSummary } from "@/data/network";
 import { breadcrumbJsonLd, itemListJsonLd, JsonLd, webPageJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
@@ -70,42 +71,54 @@ export default function LocationsPage() {
         <Container>
           <SectionHeading
             title="Browse every city we serve"
-            lede="Choose your state to see the full list. Don't see yours yet? We arrange trips in all 50 states — call us and we'll set it up."
+            lede="Every city we serve, listed by state. Open any one for fleet, pricing, and pickup details. Don't see yours yet? We arrange trips in all 50 states — call us and we'll set it up."
           />
-          <div className="mt-10 flex flex-col gap-12">
+          <div className="mt-10 flex flex-col gap-14">
             {statesByRegion().map((group) => (
               <div key={group.region}>
                 <h3 className="text-2xl font-semibold text-primary">
                   {group.region}
                 </h3>
-                <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-6 flex flex-col gap-6">
                   {group.states.map((state) => {
-                    const cityCount = citiesOfState(state.slug).length;
+                    const stateCities = citiesOfStateAlphabetical(state.slug);
                     return (
-                      <li key={state.slug}>
-                        <Link
-                          href={`/locations/${state.slug}`}
-                          className="group block h-full rounded-xl"
-                        >
-                          <Card
-                            size="sm"
-                            className="h-full transition-colors duration-150 group-hover:bg-muted group-hover:ring-primary/30"
-                          >
-                            <CardContent>
-                              <span className="text-lg font-semibold text-primary group-hover:underline">
-                                {state.name}
-                              </span>
-                              <p className="mt-1 text-muted-foreground">
-                                {cityCount}{" "}
-                                {cityCount === 1 ? "city" : "cities"} served
-                              </p>
-                            </CardContent>
-                          </Card>
-                        </Link>
-                      </li>
+                      <Card
+                        key={state.slug}
+                        className="city-panel"
+                        style={
+                          {
+                            "--city-count": stateCities.length,
+                          } as CSSProperties
+                        }
+                      >
+                        <CardContent>
+                          <h4 className="font-heading text-lg font-bold text-primary">
+                            <Link
+                              href={`/locations/${state.slug}`}
+                              className="hover:underline"
+                            >
+                              {state.name}
+                            </Link>
+                            <span className="ml-2 text-sm font-semibold text-muted-foreground">
+                              {stateCities.length.toLocaleString("en-US")}{" "}
+                              {stateCities.length === 1 ? "city" : "cities"} served
+                            </span>
+                          </h4>
+                          <ul className="mt-2 gap-x-8 text-sm columns-1 sm:columns-2 lg:columns-3 xl:columns-4 [&_a:hover]:underline [&_a]:flex [&_a]:min-h-11 [&_a]:items-center [&_a]:text-primary [&_li]:break-inside-avoid">
+                            {stateCities.map((city) => (
+                              <li key={city.slug}>
+                                <a href={`/locations/${state.slug}/${city.slug}`}>
+                                  {`Charter Bus in ${city.name}, ${state.abbr}`}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      </Card>
                     );
                   })}
-                </ul>
+                </div>
               </div>
             ))}
           </div>

@@ -32,7 +32,7 @@ function NetworkHubs() {
                   />
                   <span>
                     <span className="text-muted-foreground">Charter Bus in</span>{" "}
-                    {hub.name}{" "}
+                    {hub.name},{" "}
                     <span className="text-xs text-muted-foreground">
                       {hub.stateAbbr}
                     </span>

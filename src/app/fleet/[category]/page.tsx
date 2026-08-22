@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
-import { fleetCategories, getFleetCategory } from "@/data/fleet";
+import {
+  fleetCategories,
+  getFleetCategory,
+  vehicleArticle,
+  vehicleTitle,
+} from "@/data/fleet";
 import { breadcrumbJsonLd, JsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
 import { BulletList } from "@/components/ui/bullet-list";
@@ -12,6 +17,7 @@ import { Section } from "@/components/ui/section";
 import { CtaBand } from "@/components/site/cta-band";
 import { DetailPageHeader } from "@/components/site/detail-page-header";
 import { FleetGallery } from "@/components/site/fleet-gallery";
+import { FleetSpecs } from "@/components/site/fleet-specs";
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -25,8 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category: slug } = await params;
   const category = getFleetCategory(slug);
   if (!category) return {};
-  const rentalName = category.vehicleName.replace(/\b[a-z]/g, (c) => c.toUpperCase());
-  const article = /^[aeiou]/i.test(category.vehicleName) ? "an" : "a";
+  const rentalName = vehicleTitle(category);
+  const article = vehicleArticle(category);
   const capacity = category.capacity[0].toLowerCase() + category.capacity.slice(1);
   return pageMetadata({
     title: `${rentalName} Rental — ${category.capacity}`,
@@ -79,19 +85,19 @@ export default async function FleetCategoryPage({ params }: Props) {
           <div className="mt-10">
             <FleetGallery images={images} label={category.name} />
           </div>
-          <p className="mt-10 max-w-3xl text-lg">{category.description}</p>
-          <div className="mt-10 grid gap-10 sm:grid-cols-2">
-            <div>
-              <h2 className="text-2xl font-semibold text-primary">
+          <div className="mt-10 grid gap-10 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <p className="text-lg">{category.description}</p>
+              <h2 className="mt-10 text-2xl font-semibold text-primary">
                 On-board amenities
               </h2>
               <CheckList
                 items={category.amenities}
-                className="mt-4 flex flex-col gap-3"
+                className="mt-4 grid gap-3 sm:grid-cols-2"
               />
-            </div>
-            <div>
-              <h2 className="text-2xl font-semibold text-primary">Ideal for</h2>
+              <h2 className="mt-10 text-2xl font-semibold text-primary">
+                Ideal for
+              </h2>
               <BulletList
                 items={category.idealFor.map((use) => ({
                   key: use,
@@ -99,11 +105,12 @@ export default async function FleetCategoryPage({ params }: Props) {
                 }))}
               />
             </div>
+            <FleetSpecs category={category} />
           </div>
         </Container>
       </Section>
       <CtaBand
-        title={`Ready to book a ${category.vehicleName}?`}
+        title={`Ready to book ${vehicleArticle(category)} ${category.vehicleName}?`}
         lede="Request a quote and we'll confirm availability for your dates the same day."
       />
     </>

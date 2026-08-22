@@ -31,7 +31,7 @@ export const siteConfig = {
       "/hero/mountain-pass.webp",
       "/hero/pacific-coast-curve.webp",
     ],
-    fallbackHeadline: "Reliable Group Transportation, Coast to Coast",
+    fallbackHeadline: "Reliable Charter\u00A0Bus Services, Coast to Coast",
     fallbackSubheadline:
       "Charter buses, mini buses, and sprinter vans for groups of every size — with clear pricing and a team you can reach.",
   },
