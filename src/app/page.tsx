@@ -85,7 +85,7 @@ export default function Home() {
           </ul>
         </Container>
       </Section>
-      <CtaBand />
+      <CtaBand title={`Ready to plan your trip with ${siteConfig.name}?`} />
     </>
   );
 }

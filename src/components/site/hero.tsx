@@ -21,7 +21,7 @@ function Hero() {
       <HeroMedia />
       <Container className="relative py-16 sm:py-24 lg:py-28">
         <p className="text-sm font-semibold tracking-[0.2em] uppercase text-accent">
-          Nationwide group transportation
+          {siteConfig.name}
         </p>
         <h1 className="mt-4 max-w-3xl text-3xl font-bold text-primary-foreground sm:text-4xl lg:text-5xl xl:text-6xl">
           {siteConfig.hero.fallbackHeadline}

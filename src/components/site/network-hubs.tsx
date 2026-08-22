@@ -17,22 +17,25 @@ function NetworkHubs() {
               cities
             </span>
           </h3>
-          <ul className="mt-3 columns-2 gap-6 text-sm">
+          <ul className="mt-3 columns-1 gap-6 text-sm sm:columns-2">
             {group.hubs.map((hub) => (
               <li key={hub.id} className="break-inside-avoid py-1">
                 <Link
                   href={`/locations/${hub.stateSlug}/${hub.citySlug}`}
-                  className="flex items-baseline gap-1.5 text-foreground hover:text-primary hover:underline"
+                  className="flex items-start gap-1.5 text-foreground hover:text-primary hover:underline"
                 >
                   <span
                     aria-hidden="true"
-                    className={`size-2 shrink-0 self-center rounded-full ${
+                    className={`mt-1.5 size-2 shrink-0 rounded-full ${
                       hub.type === "company" ? "bg-map-company" : "bg-accent"
                     }`}
                   />
-                  {hub.name}
-                  <span className="text-xs text-muted-foreground">
-                    {hub.stateAbbr}
+                  <span>
+                    <span className="text-muted-foreground">Charter Bus in</span>{" "}
+                    {hub.name}{" "}
+                    <span className="text-xs text-muted-foreground">
+                      {hub.stateAbbr}
+                    </span>
                   </span>
                 </Link>
               </li>

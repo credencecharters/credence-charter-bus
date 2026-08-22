@@ -43,7 +43,7 @@ function StateCities({ state, page }: { state: StateEntry; page: number }) {
               href={`/locations/${state.slug}/${city.slug}`}
               className="flex min-h-11 items-center rounded-md px-3 font-medium text-primary hover:bg-muted hover:underline"
             >
-              Charter buses in {city.name}
+              Charter Bus in {city.name}
             </Link>
           </li>
         ))}
