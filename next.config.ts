@@ -132,7 +132,6 @@ const nextConfig: NextConfig = {
       },
       { source: "/about/booking", destination: "/quote", permanent: true },
       { source: "/tour-booking", destination: "/quote", permanent: true },
-      { source: "/reviews", destination: "/", permanent: true },
     ];
   },
 };

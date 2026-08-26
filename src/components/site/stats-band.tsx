@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container"
 const stats = [
   { value: siteConfig.stats.yearsInBusiness, label: "Years in business" },
   { value: siteConfig.stats.passengersTransported, label: "Passengers transported" },
-  { value: siteConfig.stats.citiesServed, label: "Cities served" },
+  { value: siteConfig.stats.tripsCompleted, label: "Trips completed" },
   { value: siteConfig.stats.milesTraveled, label: "Miles traveled" },
 ]
 

@@ -69,6 +69,11 @@ function Footer() {
               </li>
             ))}
             <li>
+              <Link href="/reviews" className={footerLinkClass}>
+                Customer Reviews
+              </Link>
+            </li>
+            <li>
               <Link href="/quote" className={footerLinkClass}>
                 Get a Free Quote
               </Link>

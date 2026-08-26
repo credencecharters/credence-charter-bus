@@ -13,6 +13,7 @@ import { CtaBand } from "@/components/site/cta-band";
 import { FeaturedFleetSection } from "@/components/site/featured-fleet-section";
 import { Hero } from "@/components/site/hero";
 import { HowItWorksSection } from "@/components/site/how-it-works-section";
+import { ReviewsSection } from "@/components/site/reviews-section";
 import { ServiceGrid } from "@/components/site/service-grid";
 import { StatsBand } from "@/components/site/stats-band";
 
@@ -85,6 +86,7 @@ export default function Home() {
           </ul>
         </Container>
       </Section>
+      <ReviewsSection />
       <CtaBand title={`Ready to plan your trip with ${siteConfig.name}?`} />
     </>
   );

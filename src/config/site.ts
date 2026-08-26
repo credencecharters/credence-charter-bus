@@ -36,9 +36,9 @@ export const siteConfig = {
   },
   stats: {
     yearsInBusiness: "12+",
-    passengersTransported: "500K+",
-    citiesServed: "750+",
-    milesTraveled: "15M+",
+    passengersTransported: "250K+",
+    tripsCompleted: "10K+",
+    milesTraveled: "7.5M+",
   },
 } as const;
 

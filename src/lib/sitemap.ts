@@ -21,6 +21,7 @@ export function corePaths() {
     "/affiliates",
     "/contact",
     "/faq",
+    "/reviews",
     "/quote",
     "/privacy",
     "/terms",
