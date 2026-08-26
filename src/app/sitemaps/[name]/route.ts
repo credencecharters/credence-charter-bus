@@ -1,8 +1,9 @@
 import {
-  corePaths,
-  locationPathsForShard,
+  coreEntries,
+  locationEntriesForShard,
   locationShardCount,
   urlsetXml,
+  type SitemapEntry,
 } from "@/lib/sitemap"
 
 export async function GET(
@@ -11,23 +12,23 @@ export async function GET(
 ) {
   const { name } = await params
 
-  let paths: string[] | null = null
+  let entries: SitemapEntry[] | null = null
   if (name === "core.xml") {
-    paths = corePaths()
+    entries = coreEntries()
   } else {
     const match = name.match(/^locations-(\d+)\.xml$/)
     if (match) {
       const shard = Number(match[1])
       if (shard < locationShardCount()) {
-        paths = locationPathsForShard(shard)
+        entries = locationEntriesForShard(shard)
       }
     }
   }
 
-  if (!paths) {
+  if (!entries) {
     return new Response("Not found", { status: 404 })
   }
-  return new Response(urlsetXml(paths), {
+  return new Response(urlsetXml(entries), {
     headers: { "Content-Type": "application/xml" },
   })
 }
