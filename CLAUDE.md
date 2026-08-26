@@ -221,17 +221,20 @@ The Charter Buses card (40–56) duplicated Motor Coaches (50–56) + Coach Buse
 
 ## Brand logo
 
-Owner supplied `public/logo.png` — a 900×900 bus mark on a flat cream canvas, **no company name in it**. `npm run logo` (`scripts/prepare-logo.mjs`) is the only thing that may write the derived files; all three are generated, never hand-edited:
-- `public/brand/logo-mark.png` (497×304, transparent) — used by `<Logo />`
-- `src/app/icon.png` (512) + `src/app/apple-icon.png` (180) — Next file-convention favicons, which replaced the stock create-next-app `favicon.ico`
+`public/brand/credence-mark.svg` is the source of truth — a navy/white/red bus mark, **no company name in it**. `npm run logo` (`scripts/prepare-logo.mjs`) is the only thing that may write the derived files; all four are generated, never hand-edited:
+- `src/app/icon.png` (480) + `src/app/favicon.ico` (16/32/48) + `src/app/apple-icon.png` (180) — Next file-convention favicons
+- `public/brand/logo-square.png` (512) — a stable URL for `src/lib/jsonld.tsx`'s Organization `logo`, which the content-hashed file-convention route cannot provide
 
-### Why the background removal is a flood fill, not a colour key
-**The bus body is filled with the same cream as the canvas** (rgb 250,236,203 vs 251,238,202). A global colour key erases the vehicle and leaves a floating outline. The script instead floods inward from the border, so only background *connected to the edge* is cut. Do not "simplify" this to a colour key.
-- Edge pixels get graded alpha plus un-premultiplication (`ALPHA_LOW`/`ALPHA_HIGH`), which is what keeps a cream halo off the navy footer. Verified by compositing on magenta, not assumed.
-- The retained body cream is remapped to the site cream `#F7F5F0` (`BODY_MATCH`). Without it the warm original reads as a yellow patch on the cream header. This is why the mark works on both cream and navy unchanged — there is no light/dark variant.
+`<Logo />` renders the SVG directly and consumes none of the generated PNGs.
+
+### The 48-multiple rule is not optional
+Google only accepts a search-results favicon whose edge is a **multiple of 48px**, so `ICON_SIZE` is **480**, not 512 (512 / 48 = 10.67). `favicon.ico` carries 16/32/48 so the bare `/favicon.ico` — which Google's crawler probes as a fallback, and which Bing and link-preview scrapers rely on outright — is never a 404. `logo-square.png` stays 512: it is a JSON-LD logo, not a favicon, so the rule does not apply. `icoFile()` hand-builds the ICO container because sharp has no `.ico` encoder; PNG-in-ICO is read by every current browser.
+
+### Replacing the logo does not reach Google's copy
+Google stores its **own** copy of a crawled favicon on `t2.gstatic.com` and serves that in results for weeks — deploying a new file changes nothing until Google recrawls the home page. Inspect what Google actually holds with `https://www.google.com/s2/favicons?domain=<domain>&sz=128`; it renders server-side, so no local cache is involved and switching browsers proves nothing. Measured 26 Aug 2026: still the pre-23-Aug art, three days after the new mark went live. Budget 1–4 weeks and set expectations with the owner up front — this reliably reads as "the fix didn't work".
 
 ### Favicon is navy, the mark is not
-`squareIcon` puts the mark on navy, not on the logo's own cream: at 32 px the cream-on-cream line art greys out into an unreadable smear (checked at 16/32/48). Navy holds the silhouette. The mark is a 1.63:1 horizontal badge, so it can never fill a square icon — if the tab icon needs to be stronger, the fix is a separate monogram, not more cropping.
+`squareIcon` puts the mark on navy, not on a light ground: at 32 px the pale line art greys out into an unreadable smear (checked at 16/32/48). Navy holds the silhouette. The mark is a 1.7:1 horizontal badge, so it can never fill a square icon — if the tab icon needs to be stronger, the fix is a separate monogram, not more cropping.
 
 ### Lockup + the 320px constraint
 `<Logo />` is mark + wordmark because the supplied art has no company name. The mark adds ~74 px, which **overflowed the 320 px header** (348 > 320) — hence `max-[360px]:hidden`, dropping the mark below 360 px while every other width keeps it. Re-run the responsive overflow audit if the lockup, header gaps, or the Menu button change.
