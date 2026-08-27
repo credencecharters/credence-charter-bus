@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { state, page, totalPages } = resolved;
   return pageMetadata({
     title: `Charter Bus Rental in ${state.name} — Cities, Page ${page}`,
-    description: `More ${state.name} cities served by Credence Charter Bus (page ${page} of ${totalPages}). Charter buses, mini buses, and sprinter vans with licensed drivers.`,
+    description: `More ${state.name} cities served by Credence Charter Bus, page ${page} of ${totalPages} — coaches, minibuses, and Sprinter vans with a professional driver.`,
     path: `/locations/${state.slug}/cities/${page}`,
     noindex: true,
   });

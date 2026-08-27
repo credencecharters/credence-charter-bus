@@ -26,6 +26,12 @@ const slugify = (value) =>
 
 const VALID_REGIONS = new Set(["Northeast", "Midwest", "South", "West"])
 
+// GeoNames lists hospital and clinic campuses as populated places. Keep this
+// pattern narrow: Virginia's "Spotsylvania Courthouse" and military-base CDPs
+// are real communities and must survive the filter.
+const NON_CITY_NAME =
+  /(VA Medical Center|Medical Center|Healthcare System|Health Care System|Hospital)/i
+
 function parseCsv(text) {
   const lines = text.split(/\r?\n/).filter((line) => line.trim().length > 0)
   const headers = lines[0].split(",").map((h) => h.trim().toLowerCase())
@@ -69,6 +75,7 @@ function fromRows(rows) {
         region,
       })
     }
+    if (NON_CITY_NAME.test(row.city)) continue
     cities.push({
       slug: slugify(row.city),
       name: row.city,

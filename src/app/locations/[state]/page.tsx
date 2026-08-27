@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!state) return {};
   return pageMetadata({
     title: `Charter Bus Rental in ${state.name}`,
-    description: `Charter buses, mini buses, and sprinter vans across ${state.name}. Choose your city for local details, or request a free all-in quote for any ${state.abbr} trip.`,
+    description: `Charter bus rental across ${state.name} — coaches, minibuses, Sprinter vans, 10–56 passengers, driver included. Choose your city for local details.`,
     path: `/locations/${state.slug}`,
   });
 }

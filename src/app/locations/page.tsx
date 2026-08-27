@@ -16,7 +16,7 @@ import { NetworkSummary } from "@/components/site/network-summary";
 export const metadata = pageMetadata({
   title: "Charter Bus Rentals by Location",
   description:
-    "Find charter bus, mini bus, and sprinter van rentals near you. Credence Charter Bus serves cities in all 50 states with licensed drivers and all-in quotes.",
+    "Charter bus rental in all 50 states — coaches, minibuses, and Sprinter vans, 10–56 passengers, driver included. Choose your state to find local service.",
   path: "/locations",
 });
 

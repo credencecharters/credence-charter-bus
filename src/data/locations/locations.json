@@ -53981,14 +53981,6 @@
       "population": 5481
     },
     {
-      "slug": "va-boston-healthcare-system-brockton-campus",
-      "name": "VA Boston Healthcare System, Brockton Campus",
-      "stateSlug": "massachusetts",
-      "lat": 42.36638,
-      "lng": -71.05896,
-      "population": 5474
-    },
-    {
       "slug": "mendon",
       "name": "Mendon",
       "stateSlug": "massachusetts",
@@ -119826,14 +119818,6 @@
       "stateSlug": "vermont",
       "lat": 43.64896,
       "lng": -72.31926,
-      "population": 2286
-    },
-    {
-      "slug": "white-river-junction-va-medical-center",
-      "name": "White River Junction VA Medical Center",
-      "stateSlug": "vermont",
-      "lat": 42.83049,
-      "lng": -72.56786,
       "population": 2286
     },
     {
