@@ -1,8 +1,5 @@
 import { siteConfig } from "@/config/site"
-import {
-  averageReviewRating,
-  customerReviews,
-} from "@/data/reviews"
+import { customerReviews } from "@/data/reviews"
 import {
   breadcrumbJsonLd,
   JsonLd,
@@ -14,7 +11,7 @@ import { Container } from "@/components/ui/container"
 import { Section, SectionHeading } from "@/components/ui/section"
 import { CtaBand } from "@/components/site/cta-band"
 import { CleanReviewUrl } from "@/components/site/clean-review-url"
-import { RatingStars, ReviewGrid } from "@/components/site/review-card"
+import { ReviewGrid } from "@/components/site/review-card"
 
 const reviewsPath = "/reviews"
 const description =
@@ -78,25 +75,12 @@ export default function ReviewsPage() {
       <JsonLd data={reviewsJsonLd} />
       <Section>
         <Container>
-          <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
-            <SectionHeading
-              as="h1"
-              eyebrow="Customer reviews"
-              title="Experiences from groups we’ve helped"
-              lede="See what customers say about booking charter buses for short-notice travel, ADA accommodations, weddings, company events, airport transfers, and group trips across the country."
-            />
-            <div className="rounded-xl bg-card px-6 py-5 shadow-xs ring-1 ring-foreground/10 lg:min-w-64">
-              <p className="font-heading text-3xl font-bold text-primary">
-                {averageReviewRating.toFixed(1)} out of 5
-              </p>
-              <div className="mt-2">
-                <RatingStars rating={averageReviewRating} />
-              </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Across {customerReviews.length} customer reviews
-              </p>
-            </div>
-          </div>
+          <SectionHeading
+            as="h1"
+            eyebrow="Customer reviews"
+            title="Experiences from groups we’ve helped"
+            lede="See what customers say about booking charter buses for short-notice travel, ADA accommodations, weddings, company events, airport transfers, and group trips across the country."
+          />
           <div className="mt-12">
             <ReviewGrid reviews={customerReviews} />
           </div>
