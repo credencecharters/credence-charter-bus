@@ -21,6 +21,7 @@ import { buildCityCopy } from "@/lib/variation";
 import { BulletDot } from "@/components/ui/bullet-list";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { InlineText } from "@/components/ui/inline-text";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { CtaBand } from "@/components/site/cta-band";
 import { FeaturedFleetSection } from "@/components/site/featured-fleet-section";
@@ -207,7 +208,7 @@ export default async function CityPage({ params }: Props) {
           </nav>
           <SectionHeading
             as="h1"
-            title={`Charter Bus Rental in ${city.name}, ${state.abbr}`}
+            title={`Charter Bus in ${city.name}, ${state.abbr}`}
             className="mt-6"
           />
           <div className="mt-7 flex flex-col gap-4 sm:flex-row">
@@ -224,10 +225,10 @@ export default async function CityPage({ params }: Props) {
           <h2 className="mt-12 text-2xl font-semibold text-primary">
             Charter bus service for {city.name} groups
           </h2>
-          <div className="mt-5 leading-7 lg:columns-2 lg:gap-x-12 lg:[orphans:3] lg:[widows:3]">
-            {[copy.lead, ...copy.details, copy.close].map((paragraph) => (
-              <p key={paragraph} className="mb-5 last:mb-0">
-                {paragraph}
+          <div className="mt-5 max-w-4xl leading-7">
+            {[copy.lead, ...copy.details, copy.close].map((paragraph, index) => (
+              <p key={index} className="mb-5 last:mb-0">
+                <InlineText text={paragraph} />
               </p>
             ))}
           </div>

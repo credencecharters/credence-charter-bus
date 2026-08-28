@@ -21,6 +21,7 @@ import { pageMetadata } from "@/lib/seo";
 import { BulletList } from "@/components/ui/bullet-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
+import { InlineText } from "@/components/ui/inline-text";
 import { Section } from "@/components/ui/section";
 import { BackLink } from "@/components/site/back-link";
 import { CtaBand } from "@/components/site/cta-band";
@@ -50,28 +51,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       height: post.heroImage.height,
     },
   });
-}
-
-const inlineLinkPattern = /\[([^\]]+)\]\((\/[^)]*)\)/g;
-
-function InlineText({ text }: { text: string }) {
-  const nodes: React.ReactNode[] = [];
-  let cursor = 0;
-  for (const match of text.matchAll(inlineLinkPattern)) {
-    if (match.index > cursor) nodes.push(text.slice(cursor, match.index));
-    nodes.push(
-      <Link
-        key={match.index}
-        href={match[2]}
-        className="font-medium text-primary underline underline-offset-4 hover:text-accent-deep"
-      >
-        {match[1]}
-      </Link>,
-    );
-    cursor = match.index + match[0].length;
-  }
-  if (cursor < text.length) nodes.push(text.slice(cursor));
-  return <>{nodes}</>;
 }
 
 function BlockRenderer({ block }: { block: BlogBlock }) {
