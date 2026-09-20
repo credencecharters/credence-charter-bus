@@ -22,7 +22,7 @@ The file currently ships with **realistic dummy data**, so nothing looks broken 
 grep -n "dummy" src/config/site.ts   # must return nothing once real values are in
 ```
 
-Set `url` to the real production domain before launch — canonicals, OpenGraph tags, and sitemap URLs all derive from it. The dummy phone number uses the `555-01xx` range reserved for fictional use, so it can never reach a real person by accident.
+Set `url` to the real production domain before launch — canonicals, OpenGraph tags, and sitemap URLs all derive from it. The phone number is the owner's real line and is no longer a placeholder; any future dummy must use the `555-01xx` range reserved for fictional use.
 
 > **Full pre-deploy audit:** see the "HARDCODED DATA — PRE-DEPLOY CHECKLIST" section in `CLAUDE.md`. It lists every invented value, including business claims (24/7 dispatch, ADA vehicles, cancellation policy, vehicle amenities) that need owner sign-off for accuracy.
 

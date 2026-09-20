@@ -294,7 +294,7 @@ Missing vs old: newsletter form, legal links (Privacy · Terms · Refund), FAQ l
 | Field | Old site value | Current dummy |
 |---|---|---|
 | Address | 3921 Innovator Drive, Sacramento, CA 95834 | 1200 Transit Way, Suite 400, Dallas TX 75201 |
-| Phone | +1 (916) 234-3232 | (800) 555-0142 |
+| Phone | +1 (916) 234-3232 | (772) 202-2576 (real, set 20 Sep 2026) |
 | Email | info@vanguardcharterbus.com | info@credencecharterbus.com |
 | Drivers email | drivers@vanguardcharterbus.com | — |
 | Established | **2014** | **2013** |
